@@ -1,4 +1,3 @@
-import { CardGrid } from "../../components/CardGrid.jsx";
 import { PaginationDemo } from "../../components/PaginationDemo.tsx";
 const LandingPage = () => {
   return (
@@ -16,10 +15,6 @@ const LandingPage = () => {
 
           <div className="w-[728px] h-[90px] bg-gray-200 border border-gray-400 flex items-center justify-center text-sm text-gray-700">
             728x90 Ad Area
-          </div>
-
-          <div className="two-columns">
-            <CardGrid />
           </div>
         </div>
 
