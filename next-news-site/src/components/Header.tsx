@@ -1,152 +1,79 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X } from "lucide-react";
+import { Home, Menu, MoveRight, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export const Header1 = () => {
+export default function Header() {
+  const pathname = usePathname();
+  const [isOpen, setOpen] = useState(false);
+
   const navigationItems = [
     {
       title: "Home",
       href: "/",
-      description: "",
+      icon: <Home size={18} />,
     },
-    {
-      title: "Product",
-      description: "Managing a small business today is already tough.",
-      items: [
-        {
-          title: "Reports",
-          href: "/reports",
-        },
-        {
-          title: "Statistics",
-          href: "/statistics",
-        },
-        {
-          title: "Dashboards",
-          href: "/dashboards",
-        },
-        {
-          title: "Recordings",
-          href: "/recordings",
-        },
-      ],
-    },
+    { title: "SON DAKİKA", href: "/son-dakika" },
+    { title: "GÜNDEM", href: "/gundem" },
+    { title: "SPOR", href: "/spor" },
+    { title: "EKONOMİ", href: "/ekonomi" },
+    { title: "TEKNOLOJİ", href: "/teknoloji" },
+    { title: "WEB TV", href: "/web-tv" },
+    { title: "FOTO GALERİ", href: "/foto-galeri" },
+    { title: "YAZARLAR", href: "/yazarlar" },
+    { title: "NEVBAHAR", href: "/nevbahar" },
   ];
 
-  const [isOpen, setOpen] = useState(false);
   return (
-    <header className="w-full z-40 fixed top-0 left-0 bg-background border-3">
-      <div className="container relative mx-auto min-h-14 flex gap-4 flex-row lg:grid lg:grid-cols-2 items-center">
-        <div className="justify-start items-center gap-4 lg:flex  flex-row">
-          <NavigationMenu className="flex justify-start items-start">
-            <NavigationMenuList className="flex justify-start gap-4 flex-row">
-              {navigationItems.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  {item.href ? (
-                    <>
-                      <NavigationMenuLink>
-                        <Button variant="ghost">{item.title}</Button>
-                      </NavigationMenuLink>
-                    </>
-                  ) : (
-                    <>
-                      <NavigationMenuTrigger className="font-medium text-sm">
-                        {item.title}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="!w-[450px] p-4">
-                        <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                          <div className="flex flex-col h-full justify-between">
-                            <div className="flex flex-col">
-                              <p className="text-base">{item.title}</p>
-                              <p className="text-muted-foreground text-sm">
-                                {item.description}
-                              </p>
-                            </div>
-                            <Button size="sm" className="mt-10">
-                              Book a call today
-                            </Button>
-                          </div>
-                          <div className="flex flex-col text-sm h-full justify-end">
-                            {item.items?.map((subItem) => (
-                              <NavigationMenuLink
-                                href={subItem.href}
-                                key={subItem.title}
-                                className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
-                              >
-                                <span>{subItem.title}</span>
-                                <MoveRight className="w-4 h-4 text-muted-foreground" />
-                              </NavigationMenuLink>
-                            ))}
-                          </div>
-                        </div>
-                      </NavigationMenuContent>
-                    </>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
+    <header className="w-full fixed top-0 left-0 z-50 bg-[#eceff4] border-b-4 border-orange-500">
+      <div className="container mx-auto flex items-center justify-between py-2 px-4">
+        <nav className="flex space-x-6 items-center">
+          {navigationItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={`relative px-3 py-2 flex items-center text-sm font-bold uppercase ${
+                  isActive ? "bg-blue-200" : ""
+                }`}
+              >
+                {item.icon && <span className="mr-1">{item.icon}</span>}
+                {item.title}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-red-600"></span>
+                )}
+              </Link>
+            );
+          })}
+        </nav>
 
-        <div className="flex justify-end w-full gap-4">
-          <Button variant="ghost" className="hidden md:inline">
-            Book a demo
-          </Button>
-          <div className="border-r hidden md:inline"></div>
-          <Button variant="outline">Sign in</Button>
-          <Button>Get started</Button>
-        </div>
-        <div className="flex w-12 shrink lg:hidden items-end justify-end">
+        {/* Hamburger Icon */}
+        <div className="lg:hidden">
           <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
-          {isOpen && (
-            <div className="absolute top-14 border-t flex flex-col w-full right-0 bg-background shadow-lg py-4 container gap-8">
-              {navigationItems.map((item) => (
-                <div key={item.title}>
-                  <div className="flex flex-col gap-2">
-                    {item.href ? (
-                      <Link
-                        href={item.href}
-                        className="flex justify-between items-center"
-                      >
-                        <span className="text-lg">{item.title}</span>
-                        <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                      </Link>
-                    ) : (
-                      <p className="text-lg">{item.title}</p>
-                    )}
-                    {item.items &&
-                      item.items.map((subItem) => (
-                        <Link
-                          key={subItem.title}
-                          href={subItem.href}
-                          className="flex justify-between items-center"
-                        >
-                          <span className="text-muted-foreground">
-                            {subItem.title}
-                          </span>
-                          <MoveRight className="w-4 h-4 stroke-1" />
-                        </Link>
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-white shadow-md py-4 px-6 flex flex-col space-y-4">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="flex justify-between items-center"
+            >
+              <span>{item.title}</span>
+              <MoveRight className="w-4 h-4 text-muted-foreground" />
+            </Link>
+          ))}
+        </div>
+      )}
     </header>
   );
-};
+}
