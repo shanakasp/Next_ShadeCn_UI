@@ -31,6 +31,7 @@ export default function RootLayout({
       >
         <TopHeader />
         <NewsSection />
+
         {children}
       </body>
     </html>

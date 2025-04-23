@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import NewsGrid from "./NewsGrid";
+import PopularNews from "./PopularNews";
+import TopNews from "./TopNews";
 export default function NewsSection() {
   const [headlines, setHeadlines] = useState([]);
   const [authors, setAuthors] = useState([]);
@@ -69,25 +71,108 @@ export default function NewsSection() {
       setCurrentPage(newPage);
     }
   };
-
   const renderPagination = () => {
-    return Array.from({ length: totalPages }, (_, i) => (
+    const pages = [];
+    const pageRangeDisplayed = 5; // Number of page buttons around current page
+    const startPage = Math.max(2, currentPage - 2);
+    const endPage = Math.min(totalPages - 1, currentPage + 2);
+
+    // Previous button
+    pages.push(
       <button
-        key={i + 1}
-        onClick={() => handlePageChange(i + 1)}
+        key="prev"
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="px-4 py-2 text-gray-600 hover:text-blue-600"
+      >
+        Previous
+      </button>
+    );
+
+    // First Page
+    pages.push(
+      <button
+        key={1}
+        onClick={() => handlePageChange(1)}
         className={`px-4 py-2 rounded-full mx-1 ${
-          currentPage === i + 1
+          currentPage === 1
             ? "bg-blue-100 text-blue-600 font-bold"
             : "text-gray-600 hover:bg-gray-100"
         }`}
       >
-        {i + 1}
+        1
       </button>
-    ));
+    );
+
+    // Ellipsis before middle pages
+    if (startPage > 2) {
+      pages.push(
+        <span key="start-ellipsis" className="px-2">
+          ...
+        </span>
+      );
+    }
+
+    // Middle pages
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-4 py-2 rounded-full mx-1 ${
+            currentPage === i
+              ? "bg-blue-100 text-blue-600 font-bold"
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    // Ellipsis after middle pages
+    if (endPage < totalPages - 1) {
+      pages.push(
+        <span key="end-ellipsis" className="px-2">
+          ...
+        </span>
+      );
+    }
+
+    // Last Page
+    if (totalPages > 1) {
+      pages.push(
+        <button
+          key={totalPages}
+          onClick={() => handlePageChange(totalPages)}
+          className={`px-4 py-2 rounded-full mx-1 ${
+            currentPage === totalPages
+              ? "bg-blue-100 text-blue-600 font-bold"
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    // Next button
+    pages.push(
+      <button
+        key="next"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="px-4 py-2 text-gray-600 hover:text-blue-600"
+      >
+        Next
+      </button>
+    );
+
+    return pages;
   };
 
   return (
-    <div className="container mx-auto px-4 mt-8">
+    <div className="container mx-auto px-4 mt-30">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main News Content */}
         <div className="lg:w-2/3">
@@ -99,7 +184,7 @@ export default function NewsSection() {
             <>
               {/* Single Featured News */}
               {headlines.length > 0 && (
-                <div className="mb-8 border-b pb-6 relative">
+                <div className="mb-8 border-b pb-6 relative mt-4">
                   <div className="relative h-96 w-full mb-4">
                     <img
                       src={headlines[0].image_url}
@@ -128,6 +213,8 @@ export default function NewsSection() {
               </div>
             </>
           )}
+          <NewsGrid />
+          <TopNews />
         </div>
 
         {/* Authors Section */}
@@ -167,6 +254,7 @@ export default function NewsSection() {
               ))}
             </div>
           </div>
+          <PopularNews />
         </div>
       </div>
     </div>
