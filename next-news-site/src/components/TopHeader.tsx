@@ -10,6 +10,7 @@ import {
   FaArrowUp,
   FaFacebookF,
   FaGoogle,
+  FaSearch,
   FaTwitter,
 } from "react-icons/fa";
 
@@ -17,7 +18,7 @@ import {
 const TopHeader = () => {
   return (
     <div className="bg-white shadow-sm py-2 border-b border-gray-200 text-sm">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2 min-w-[180px]">
           <img
@@ -28,7 +29,7 @@ const TopHeader = () => {
         </div>
 
         {/* Currency Exchange Center */}
-        <div className="flex items-center gap-6 text-gray-800 font-medium">
+        <div className="flex items-center gap-6 text-gray-800 font-medium hidden sm:flex">
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Dollar:</span>
             <span className="text-gray-700">35,4789</span>
@@ -55,8 +56,8 @@ const TopHeader = () => {
               placeholder="SEARCH"
               className="px-4 py-1.5 pl-5 pr-10 border border-gray-300 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
-            <button className="absolute right-3 top-1.5 text-gray-500">
-              🔍
+            <button className="absolute right-3 top-2.5 text-gray-500">
+              <FaSearch />
             </button>
           </div>
 
@@ -73,11 +74,29 @@ const TopHeader = () => {
             </a>
           </div>
         </div>
+
+        {/* Mobile Currency Center */}
+        <div className="sm:hidden flex flex-wrap gap-4 mt-2 text-gray-800 font-medium">
+          <div className="flex items-center gap-1">
+            <span className="text-gray-600 font-semibold">Dollar:</span>
+            <span className="text-gray-700">35,4789</span>
+            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-gray-600 font-semibold">Euro:</span>
+            <span className="text-gray-700">36,6475</span>
+            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-gray-600 font-semibold">Altın:</span>
+            <span className="text-gray-700">36,6475</span>
+            <FaArrowDown className="text-red-600 text-xs mt-0.5" />
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
 // Main Navigation Component
 const MainNavigation = () => {
   const pathname = usePathname();
