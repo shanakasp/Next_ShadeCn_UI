@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import NewsSection from "@/components/NewsSectoin";
 import TopHeader from "@/components/TopHeader";
 import type { Metadata } from "next";
@@ -31,7 +32,7 @@ export default function RootLayout({
       >
         <TopHeader />
         <NewsSection />
-
+        <Footer />
         {children}
       </body>
     </html>
