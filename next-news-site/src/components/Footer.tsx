@@ -46,9 +46,11 @@ const Footer = () => {
       </div>
 
       {/* Section 3: Bottom Ash Color Texts */}
-      <div className="mt-10 bg-gray-800 text-gray-400 text-sm py-3 px-4 flex justify-between">
-        <span>&copy; 2025 Your Company. All rights reserved.</span>
-        <span>Terms & Privacy</span>
+      <div className="mt-10 bg-gray-800 text-gray-400 text-sm py-3 px-4">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <span>&copy; Samanyoluhaber.</span>
+          <span>© 2025 — Copyright</span>
+        </div>
       </div>
     </footer>
   );

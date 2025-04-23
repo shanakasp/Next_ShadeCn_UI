@@ -111,7 +111,7 @@ const MainNavigation = () => {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className={`relative px-3 py-2 flex items-center text-sm font-semibold uppercase whitespace-nowrap ${
+                  className={`relative px-2 sm:px-3 py-1.5 sm:py-2 flex items-center text-xs sm:text-sm font-semibold uppercase whitespace-nowrap ${
                     isActive ? "bg-blue-200" : ""
                   }`}
                 >
