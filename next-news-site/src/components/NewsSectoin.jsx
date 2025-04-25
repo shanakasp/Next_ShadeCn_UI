@@ -231,19 +231,26 @@ export default function NewsSection() {
         </div>
 
         {/* Authors Section */}
-        <div className="lg:w-1/3 ">
-          <div className="bg-white shadow-sm p-4 ">
-            <div className="space-y-6">
+        <div className="lg:w-1/3 relative mt-13 ">
+          {/* Decorative top-left image */}
+          <img
+            src="/authors.png" // Update this path to your actual image path
+            alt="Decoration"
+            className="absolute -top-9 -left-1 w-28 h-12 z-10"
+          />
+
+          <div className="bg-white py-4 border-t-4 border-orange-800">
+            <div className="space-y-6 ">
               {authors.map((author, index) => (
                 <div
                   key={index}
-                  className="flex items-start space-x-4 border-b pb-4"
+                  className="flex items-start space-x-3 mt-3 pb-3"
                 >
-                  <div className="flex-shrink-0 w-20 h-20 relative">
+                  <div className="flex-shrink-0 w-[100px] h-[100px] relative">
                     <img
                       src={author.image_path}
                       alt={author.title.split("Harun Tokak")[0]}
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full rounded"
                     />
                   </div>
                   <div className="flex-grow">
@@ -263,6 +270,7 @@ export default function NewsSection() {
               ))}
             </div>
           </div>
+
           <PopularNews />
         </div>
       </div>
