@@ -1,14 +1,17 @@
 "use client";
 
+//Main headline
+
 import { useEffect, useState } from "react";
 import NewsGrid from "./NewsGrid";
 import PopularNews from "./PopularNews";
 import TopNews from "./TopNews";
+
 export default function NewsSection() {
   const [headlines, setHeadlines] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(8); // Assuming 8 pages for this example
+  const [totalPages, setTotalPages] = useState(15); // Changed to 15 based on your request
   const [loading, setLoading] = useState(true);
 
   // API authentication token
@@ -19,8 +22,9 @@ export default function NewsSection() {
     const fetchHeadlines = async () => {
       try {
         setLoading(true);
+        // Fetch all 15 headlines at once
         const response = await fetch(
-          `https://editor.samanyoluhaber.com/api/v1/headlines?limit=${currentPage}`,
+          "https://editor.samanyoluhaber.com/api/v1/headlines?limit=15",
           {
             headers: {
               Authorization: `Bearer ${API_TOKEN}`,
@@ -30,10 +34,10 @@ export default function NewsSection() {
         );
         const data = await response.json();
         if (data.status === "success" && data.data.length > 0) {
-          const headlineIndex = currentPage - 1;
-          if (data.data[headlineIndex]) {
-            setHeadlines([data.data[headlineIndex]]);
-          }
+          // Store all headlines
+          setHeadlines(data.data);
+          // Update total pages based on actual data length
+          setTotalPages(data.data.length);
         }
       } catch (error) {
         console.error("Error fetching headlines:", error);
@@ -64,13 +68,14 @@ export default function NewsSection() {
 
     fetchHeadlines();
     fetchAuthors();
-  }, [currentPage]);
+  }, []); // Removed currentPage dependency since we're fetching all headlines at once
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
+
   const renderPagination = () => {
     const pages = [];
     const pageRangeDisplayed = 5; // Number of page buttons around current page
@@ -171,6 +176,10 @@ export default function NewsSection() {
     return pages;
   };
 
+  // Get the current headline based on the current page
+  const currentHeadline =
+    headlines.length > 0 ? headlines[currentPage - 1] : null;
+
   return (
     <div className="container mx-auto px-4 mt-30">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -183,24 +192,28 @@ export default function NewsSection() {
           ) : (
             <>
               {/* Single Featured News */}
-              {headlines.length > 0 && (
-                <div className="mb-8 border-b pb-6 relative mt-4">
-                  <div className="relative h-96 w-full mb-4">
+              {currentHeadline && (
+                <div className="mb-8 border-b pb-6 relative mt-4 sm:mt-4 xs:mt-8 xs:pt-8">
+                  {/* 16:9 aspect ratio container */}
+                  <div
+                    className="relative w-full mb-4"
+                    style={{ paddingBottom: "56.25%" }}
+                  >
                     <img
-                      src={headlines[0].image_url}
-                      alt={headlines[0].title}
-                      className="object-cover w-full h-full"
+                      src={currentHeadline.image_url}
+                      alt={currentHeadline.title}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
                     />
-                    {/* Title positioned on top of the image */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-4">
+                    {/* Gradient overlay from black to transparent */}
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent p-4 flex items-end">
                       <h2 className="text-2xl font-bold text-white">
-                        {headlines[0].title}
+                        {currentHeadline.title}
                       </h2>
                     </div>
                   </div>
                   <div className="flex items-center text-gray-600 text-sm">
                     <span className="bg-red-600 text-white px-2 py-1 mr-2">
-                      {headlines[0].name}
+                      {currentHeadline.name}
                     </span>
                     <span>5 saat önce</span>
                   </div>
@@ -218,12 +231,8 @@ export default function NewsSection() {
         </div>
 
         {/* Authors Section */}
-        <div className="lg:w-1/3">
-          <div className="bg-white shadow-sm p-4">
-            <h2 className="text-xl font-bold text-white bg-amber-800 px-4 py-2 mb-4">
-              YAZARLAR
-            </h2>
-
+        <div className="lg:w-1/3 ">
+          <div className="bg-white shadow-sm p-4 ">
             <div className="space-y-6">
               {authors.map((author, index) => (
                 <div

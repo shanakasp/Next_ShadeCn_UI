@@ -1,5 +1,6 @@
 "use client";
 
+//2 way grid
 import { useEffect, useState } from "react";
 
 interface NewsItem {
@@ -50,7 +51,7 @@ const NewsGrid = () => {
                 <img
                   src={item.image_url}
                   alt={item.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover rounded"
                 />
                 <h3 className="text-lg font-semibold">
                   {truncate(item.title, 80)}
@@ -64,7 +65,7 @@ const NewsGrid = () => {
                 <img
                   src={item.image_url}
                   alt={item.title}
-                  className="w-32 h-24 object-cover"
+                  className="w-40 h-24 object-cover rounded"
                 />
                 <h3 className="text-base font-medium">
                   {truncate(item.title, 80)}
@@ -90,7 +91,7 @@ const NewsGrid = () => {
                 <img
                   src={item.image_url}
                   alt={item.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover rounded"
                 />
                 <h3 className="text-lg font-semibold">
                   {truncate(item.title, 80)}
@@ -104,7 +105,7 @@ const NewsGrid = () => {
                 <img
                   src={item.image_url}
                   alt={item.title}
-                  className="w-32 h-24 object-cover"
+                  className="w-40 h-24 object-cover rounded"
                 />
                 <h3 className="text-base font-medium">
                   {truncate(item.title, 80)}

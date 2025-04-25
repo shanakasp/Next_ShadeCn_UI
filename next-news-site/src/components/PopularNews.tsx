@@ -1,5 +1,6 @@
 "use client";
 
+// Under the authors view
 import { useEffect, useState } from "react";
 
 interface PopularNewsItem {
@@ -42,7 +43,7 @@ const PopularNews = () => {
             <img
               src={item.path}
               alt={item.title}
-              className="w-36 h-28 object-cover rounded"
+              className="w-48 h-28 object-cover rounded"
             />
             <div className="flex flex-col">
               <h3 className="text-lg font-semibold">

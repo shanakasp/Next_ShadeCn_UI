@@ -1,36 +1,55 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
-interface TopNewsItem {
+//2nd headline last 15
+interface HeadlineItem {
   id: number;
   title: string;
   url: string;
   image_url: string;
   siteName: string;
+  name: string;
+  type: string;
 }
 
-const TopNews = () => {
-  const [newsData, setNewsData] = useState<TopNewsItem[]>([]);
+const Headlines = () => {
+  const [newsData, setNewsData] = useState<HeadlineItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://editor.samanyoluhaber.com/api/v1/top-news?limit=7", {
+    setIsLoading(true);
+    fetch("https://editor.samanyoluhaber.com/api/v1/headlines?limit=30", {
       headers: {
         Authorization:
           "Bearer Qp9zY2tAdn38vDb0jXzAEmr0yRwHogZ3spYiEVl1sn5j2zv5QyKN49U6WObVmFbL",
       },
     })
       .then((res) => res.json())
-      .then((data) => setNewsData(data.data))
-      .catch((err) => console.error("Error fetching top news:", err));
+      .then((data) => {
+        const headlines = data.data.slice(15, 30);
+        setNewsData(headlines);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching headlines:", err);
+        setIsLoading(false);
+      });
   }, []);
 
   const truncate = (text: string, max: number) =>
     text.length > max ? text.slice(0, max) + "..." : text;
 
+  if (isLoading) {
+    return (
+      <div className="border-t-4 border-blue-700 mt-2 p-8 text-center">
+        <p className="text-gray-600">Loading headlines...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="border-t-4 border-blue-700 mt-2">
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 py-4">
         {newsData.map((item) => (
           <a
             key={item.id}
@@ -39,16 +58,43 @@ const TopNews = () => {
             rel="noopener noreferrer"
             className="flex gap-4 border-b pb-4 items-start hover:bg-gray-100 p-2 border rounded-none border-t-0 border-l-0 border-r-0 transition"
           >
-            <img
-              src={item.image_url}
-              alt={item.title}
-              className="w-36 h-28 object-cover"
-            />
+            <div
+              className="
+    w-[140px] h-[100px]
+    sm:w-[180px] sm:h-[120px]
+    md:w-[250px] md:h-[150px]
+    lg:w-[300px] lg:h-[170px]
+    xl:w-[355px] xl:h-[200px]
+    overflow-hidden
+    rounded
+    flex-shrink-0
+  "
+            >
+              <img
+                src={item.image_url}
+                alt={item.title}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+
             <div className="flex flex-col">
-              <h3 className="text-lg font-semibold">
+              <h3
+                className="
+                  font-semibold 
+                  text-base 
+                  sm:text-lg 
+                  md:text-xl 
+                  lg:text-2xl 
+                  xl:text-[32px]
+                "
+              >
                 {truncate(item.title, 80)}
               </h3>
-              <p className="text-sm text-gray-600 mt-1">{item.siteName}</p>
+              <div className="flex gap-2 mt-1">
+                <p className="text-sm text-gray-600">{item.siteName}</p>
+                <span className="text-sm text-gray-400">•</span>
+                <p className="text-sm text-blue-600">{item.name}</p>
+              </div>
             </div>
           </a>
         ))}
@@ -57,4 +103,4 @@ const TopNews = () => {
   );
 };
 
-export default TopNews;
+export default Headlines;
