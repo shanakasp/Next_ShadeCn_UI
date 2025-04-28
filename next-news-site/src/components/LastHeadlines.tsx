@@ -41,16 +41,31 @@ const Headlines = () => {
 
   if (isLoading) {
     return (
-      <div className="border-t-4 border-blue-700 mt-2 p-8 text-center">
-        <p className="text-gray-600">Loading headlines...</p>
+      <div className="border-t-4 border-blue-700 mt-4 p-8 text-center relative">
+        {/* Overlapping image at top of border */}
+        <div className="absolute top-0 left-0 -mt-2 ml-2 ">
+          <img
+            src="/BrownFirstNews.png"
+            alt="Top banner"
+            className=" h-10 object-cover rounded"
+          />
+        </div>
+        <p className="text-gray-600 mt-6">Loading headlines...</p>
       </div>
     );
   }
 
   return (
-    <div className="border-t-4 border-blue-700 mt-2">
-      {" "}
-      <div className="flex flex-col gap-4 py-4">
+    <div className="border-t-4 border-blue-700 mt-12 relative">
+      {/* Overlapping image at top of border */}
+      <div className="absolute -top-8 left-0 -mt-2 ">
+        <img
+          src="/LastHeadline.png"
+          alt="Top banner"
+          className=" h-13 object-cover rounded"
+        />
+      </div>
+      <div className="flex flex-col gap-4 py-4 mt-2">
         {newsData.map((item) => (
           <a
             key={item.id}
@@ -61,15 +76,15 @@ const Headlines = () => {
           >
             <div
               className="
-    w-[140px] h-[100px]
-    sm:w-[180px] sm:h-[120px]
-    md:w-[250px] md:h-[150px]
-    lg:w-[300px] lg:h-[170px]
-    xl:w-[355px] xl:h-[200px]
-    overflow-hidden
-    rounded
-    flex-shrink-0
-  "
+                w-[140px] h-[100px]
+                sm:w-[180px] sm:h-[120px]
+                md:w-[250px] md:h-[150px]
+                lg:w-[300px] lg:h-[170px]
+                xl:w-[355px] xl:h-[200px]
+                overflow-hidden
+                rounded
+                flex-shrink-0
+              "
             >
               <img
                 src={item.image_url}
@@ -81,12 +96,12 @@ const Headlines = () => {
             <div className="flex flex-col">
               <h3
                 className="
-                  font-semibold 
-                  text-base 
-                  sm:text-lg 
-                  md:text-xl 
-                  lg:text-2xl 
-                  xl:text-[32px]
+                  font-semibold
+                  text-base
+                  sm:text-lg
+                  md:text-xl
+                  lg:text-2xl
+                  xl:text-[28px]
                 "
               >
                 {truncate(item.title, 80)}

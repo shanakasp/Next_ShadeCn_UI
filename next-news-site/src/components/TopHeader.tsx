@@ -5,14 +5,7 @@ import { Home, Menu, MoveRight, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {
-  FaArrowDown,
-  FaArrowUp,
-  FaFacebookF,
-  FaGoogle,
-  FaSearch,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaFacebookF, FaGoogle, FaSearch, FaTwitter } from "react-icons/fa";
 
 // TopHeader Component
 const TopHeader = () => {
@@ -33,17 +26,21 @@ const TopHeader = () => {
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Dollar:</span>
             <span className="text-gray-700">35,4789</span>
-            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+            <img src="/TrendUp.png" alt="Up Arrow" className="h-6 w-6 mt-0.5" />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Euro:</span>
             <span className="text-gray-700">36,6475</span>
-            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+            <img src="/TrendUp.png" alt="Up Arrow" className="h-6 w-6 mt-0.5" />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Altın:</span>
             <span className="text-gray-700">36,6475</span>
-            <FaArrowDown className="text-red-600 text-xs mt-0.5" />
+            <img
+              src="/TrendDown.png"
+              alt="Down Arrow"
+              className="h-6 w-6 mt-0.5"
+            />
           </div>
         </div>
 
@@ -80,17 +77,29 @@ const TopHeader = () => {
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Dollar:</span>
             <span className="text-gray-700">35,4789</span>
-            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+            <img
+              src="/up-arrow.png"
+              alt="Up Arrow"
+              className="h-3 w-3 mt-0.5"
+            />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Euro:</span>
             <span className="text-gray-700">36,6475</span>
-            <FaArrowUp className="text-green-600 text-xs mt-0.5" />
+            <img
+              src="/up-arrow.png"
+              alt="Up Arrow"
+              className="h-3 w-3 mt-0.5"
+            />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-gray-600 font-semibold">Altın:</span>
             <span className="text-gray-700">36,6475</span>
-            <FaArrowDown className="text-red-600 text-xs mt-0.5" />
+            <img
+              src="/down-arrow.png"
+              alt="Down Arrow"
+              className="h-3 w-3 mt-0.5"
+            />
           </div>
         </div>
       </div>

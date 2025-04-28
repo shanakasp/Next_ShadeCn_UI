@@ -2,6 +2,10 @@
 
 //Main headline
 
+import {
+  LargeRectangleBanner,
+  LeaderboardBanner,
+} from "@/AddBanners/AddBanners";
 import { useEffect, useState } from "react";
 import LastHeadlines from "./LastHeadlines";
 import NewsGrid from "./NewsGrid";
@@ -220,11 +224,11 @@ export default function NewsSection() {
                   </div>
                 </div>
               )}
-
               {/* Pagination */}
               <div className="flex justify-center items-center mt-8 space-x-1">
                 {renderPagination()}
               </div>
+              <LeaderboardBanner id="top-ad" className="my-4" />
             </>
           )}
           <NewsGrid />
@@ -237,9 +241,8 @@ export default function NewsSection() {
           <img
             src="/authors.png" // Update this path to your actual image path
             alt="Decoration"
-            className="absolute -top-9 -left-1 w-28 h-12 z-10"
+            className="absolute -top-8 -left-0  h-10 z-10"
           />
-
           <div className="bg-white py-4 border-t-4 border-orange-800">
             <div className="space-y-6 ">
               {authors.map((author, index) => (
@@ -268,12 +271,13 @@ export default function NewsSection() {
                     </p>
                   </div>
                 </div>
-              ))}
+              ))}{" "}
+              <LargeRectangleBanner id="content-ad" className="my-6" />{" "}
             </div>
           </div>
-
-          <PopularNews />
-          <TopNews />
+          <PopularNews />{" "}
+          <LargeRectangleBanner id="content-ad" className="my-6" /> <TopNews />
+          <LargeRectangleBanner id="content-ad" className="my-6" />
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { LeaderboardBanner } from "@/AddBanners/AddBanners";
 import { useEffect, useState } from "react";
 
 interface NewsItem {
@@ -35,37 +36,22 @@ const NewsGrid = () => {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      {/* Banner Images Section */}
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
-        {/* Left Banner */}
-        <div className="w-full md:w-1/2 relative">
-          <div className="absolute top-0 left-0">
-            <img
-              src="/NEWSBlue.png"
-              alt="Top banner"
-              className="w-20 h-12.5 object-cover rounded"
-            />
-          </div>
-          <div className="border-t-4 border-blue-400 mt-10 pt-2"></div>
-        </div>
-
-        {/* Right Banner */}
-        <div className="w-full md:w-1/2 relative">
-          <div className="absolute top-0 left-0">
-            <img
-              src="/NEWSOrange.png"
-              alt="Top banner"
-              className="w-20 h-12.5 object-cover rounded"
-            />
-          </div>
-          <div className="border-t-4 border-orange-400 mt-10 pt-2"></div>
-        </div>
-      </div>
-
       {/* News Content Section */}
       <div className="flex flex-col md:flex-row gap-6">
         {/* Left Column News */}
         <div className="flex flex-col gap-4 w-full md:w-1/2">
+          {/* Left Banner */}
+          <div className="relative">
+            <div className="absolute top-0 left-0">
+              <img
+                src="/NEWSBlue.png"
+                alt="Blue news banner"
+                className="w-20 h-12 object-cover rounded"
+              />
+            </div>
+            <div className="border-t-4 border-blue-400 mt-10 pt-2"></div>
+          </div>
+
           {firstColumn.map((item, index) => (
             <a
               key={item.id}
@@ -106,6 +92,18 @@ const NewsGrid = () => {
 
         {/* Right Column News */}
         <div className="flex flex-col gap-4 w-full md:w-1/2">
+          {/* Right Banner */}
+          <div className="relative">
+            <div className="absolute top-0 left-0">
+              <img
+                src="/NEWSOrange.png"
+                alt="Orange news banner"
+                className="w-20 h-12 object-cover rounded"
+              />
+            </div>
+            <div className="border-t-4 border-orange-400 mt-10 pt-2"></div>
+          </div>
+
           {secondColumn.map((item, index) => (
             <a
               key={item.id}
@@ -144,6 +142,7 @@ const NewsGrid = () => {
           ))}
         </div>
       </div>
+      <LeaderboardBanner id="top-ad" className="my-4" />
     </div>
   );
 };

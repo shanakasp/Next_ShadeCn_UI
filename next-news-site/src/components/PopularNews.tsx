@@ -30,8 +30,17 @@ const PopularNews = () => {
     text.length > max ? text.slice(0, max) + "..." : text;
 
   return (
-    <div className="border-t-4 border-red-700 mt-2">
-      <div className="flex flex-col gap-4 py-4">
+    <div className="border-t-4 border-red-700 mt-8 relative">
+      {/* Overlapping image at top of border */}
+      <div className="absolute -top-3.5 left-0 -mt-6 ">
+        <img
+          src="/BrownFirstNews.png"
+          alt="Top banner"
+          className=" h-11 object-cover rounded"
+        />
+      </div>
+
+      <div className="flex flex-col gap-4 py-4 mt-2.5">
         {newsData.slice(0, 8).map((item) => (
           <a
             key={item.id}
