@@ -35,18 +35,37 @@ const NewsGrid = () => {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      {/* Grid Columns */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Left Column */}
-        <div className="flex flex-col gap-4 w-full md:w-1/2 border-t-4 border-orange-500 pt-2 relative">
-          {/* Image positioned at top left of container */}
-          <div className="absolute top-0 left-0 -mt-2 -ml-1">
+      {/* Banner Images Section */}
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        {/* Left Banner */}
+        <div className="w-full md:w-1/2 relative">
+          <div className="absolute top-0 left-0">
             <img
-              src="/authors.png"
+              src="/NEWSBlue.png"
               alt="Top banner"
-              className="w-20 h-10 object-cover rounded"
+              className="w-20 h-12.5 object-cover rounded"
             />
           </div>
+          <div className="border-t-4 border-blue-400 mt-10 pt-2"></div>
+        </div>
+
+        {/* Right Banner */}
+        <div className="w-full md:w-1/2 relative">
+          <div className="absolute top-0 left-0">
+            <img
+              src="/NEWSOrange.png"
+              alt="Top banner"
+              className="w-20 h-12.5 object-cover rounded"
+            />
+          </div>
+          <div className="border-t-4 border-orange-400 mt-10 pt-2"></div>
+        </div>
+      </div>
+
+      {/* News Content Section */}
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Left Column News */}
+        <div className="flex flex-col gap-4 w-full md:w-1/2">
           {firstColumn.map((item, index) => (
             <a
               key={item.id}
@@ -60,7 +79,7 @@ const NewsGrid = () => {
                   <img
                     src={item.image_url}
                     alt={item.title}
-                    className="w-full h-48 object-cover rounded mt-6"
+                    className="w-full h-48 object-cover rounded"
                   />
                   <h3 className="text-lg font-semibold">
                     {truncate(item.title, 80)}
@@ -85,16 +104,8 @@ const NewsGrid = () => {
           ))}
         </div>
 
-        {/* Right Column */}
-        <div className="flex flex-col gap-4 w-full md:w-1/2 border-t-4 border-blue-500 pt-2 relative">
-          {/* Image positioned at top left of container */}
-          <div className="absolute top-0 left-0 -mt-2 -ml-1">
-            <img
-              src="/authors.png"
-              alt="Top banner"
-              className="w-20 h-10 object-cover rounded"
-            />
-          </div>
+        {/* Right Column News */}
+        <div className="flex flex-col gap-4 w-full md:w-1/2">
           {secondColumn.map((item, index) => (
             <a
               key={item.id}
@@ -108,7 +119,7 @@ const NewsGrid = () => {
                   <img
                     src={item.image_url}
                     alt={item.title}
-                    className="w-full h-48 object-cover rounded mt-6"
+                    className="w-full h-48 object-cover rounded"
                   />
                   <h3 className="text-lg font-semibold">
                     {truncate(item.title, 80)}

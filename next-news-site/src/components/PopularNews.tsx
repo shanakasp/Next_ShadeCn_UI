@@ -31,14 +31,14 @@ const PopularNews = () => {
 
   return (
     <div className="border-t-4 border-red-700 mt-2">
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 py-4">
         {newsData.slice(0, 8).map((item) => (
           <a
             key={item.id}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex gap-4 border-b pb-4 items-start hover:bg-gray-100 p-2 rounded transition"
+            className="flex gap-4 border-b pb-4 items-start hover:bg-gray-100 py-2 rounded transition"
           >
             <img
               src={item.path}

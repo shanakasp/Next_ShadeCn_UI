@@ -3,6 +3,7 @@
 //Main headline
 
 import { useEffect, useState } from "react";
+import LastHeadlines from "./LastHeadlines";
 import NewsGrid from "./NewsGrid";
 import PopularNews from "./PopularNews";
 import TopNews from "./TopNews";
@@ -227,7 +228,7 @@ export default function NewsSection() {
             </>
           )}
           <NewsGrid />
-          <TopNews />
+          <LastHeadlines />
         </div>
 
         {/* Authors Section */}
@@ -272,6 +273,7 @@ export default function NewsSection() {
           </div>
 
           <PopularNews />
+          <TopNews />
         </div>
       </div>
     </div>
